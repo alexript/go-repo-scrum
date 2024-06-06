@@ -25,5 +25,5 @@ package main
 import "github.com/alexript/go-repo-scrum/runtime"
 
 func main() {
-	runtime.Start()
+	runtime.Start(true)
 }

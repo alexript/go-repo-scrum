@@ -24,6 +24,7 @@ package runtime
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/alexript/go-repo-scrum/entity"
 	"github.com/alexript/go-repo-scrum/fs"
@@ -33,14 +34,24 @@ var (
 	catalog *entity.Catalog
 )
 
-func Start() {
-	root := fs.Get()
-	onStart(root)
+func startUI(root *fs.Root) {
+	fmt.Println("UI is not implemented yet.")
 }
 
-func StartIn(dirname string) {
+func Start(withUI bool) {
+	root := fs.Get()
+	onStart(root)
+	if withUI {
+		startUI(root)
+	}
+}
+
+func StartIn(dirname string, withUI bool) {
 	root := fs.GetIn(dirname)
 	onStart(root)
+	if withUI {
+		startUI(root)
+	}
 }
 
 func onStart(root *fs.Root) {
