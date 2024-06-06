@@ -23,9 +23,9 @@
 package entity
 
 type Comment struct {
-	IssueNumber  uint32
-	ParentNumber uint32
-	Date         int64
-	AuthorNumber uint32
-	Text         string
+	IssueNumber  uint32 `json:"issueid"`
+	ParentNumber uint32 `json:"parentid"` // means 'parent comment'
+	Date         int64  `json:"date"`
+	AuthorNumber uint32 `json:"personid"`
+	Text         string `json:"text"`
 }

@@ -23,14 +23,15 @@
 package entity
 
 type Issue struct {
-	SprintNumber   uint32
-	TypeNumber     uint32
-	ParentNumber   uint32
-	Number         uint32
-	Date           int64
-	Title          string
-	ReporterNumber uint32
-	Description    string
-	PriorityNumber uint32
-	StateNumber    uint32
+	ReleaseNuber   uint32 `json:"releaseid"`
+	SprintNumber   uint32 `json:"sprintid"`
+	TypeNumber     uint32 `json:"typeid"`
+	ParentNumber   uint32 `json:"parentid"`
+	Number         uint32 `json:"id"`
+	Date           int64  `json:"date"` // NOTE: no date until 'New' state
+	Title          string `json:"title"`
+	ReporterNumber uint32 `json:"personid"`
+	Description    string `json:"text"`
+	PriorityNumber uint32 `json:"priorityid"`
+	StateNumber    uint32 `json:"stateid"`
 }
