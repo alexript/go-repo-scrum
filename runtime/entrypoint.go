@@ -20,10 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package main
+package runtime
 
-import "github.com/alexript/go-repo-scrum/runtime"
+import "github.com/alexript/go-repo-scrum/fs"
 
-func main() {
-	runtime.Start()
+func Start() {
+	root := fs.Get()
+	if err := root.Prepare(); err != nil {
+		panic(err)
+	}
+
 }
