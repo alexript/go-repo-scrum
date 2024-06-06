@@ -32,6 +32,7 @@ import (
 )
 
 const (
+	catalogversion  = 1
 	catalogFilename = ".catalog.json"
 )
 

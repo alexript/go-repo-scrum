@@ -22,9 +22,43 @@
 
 package entity
 
+import "math"
+
 type Release struct {
-	Number    uint `json:"id"`
-	StartDate uint `json:"start"`
-	EndDate   uint `json:"end"`
-	Done      bool `json:"done"`
+	Number    uint32 `json:"id"`
+	StartDate int64  `json:"start"`
+	EndDate   int64  `json:"end"`
+	Done      bool   `json:"done"`
+	Title     string `json:"title"`
+}
+
+func defaultReleaseArray() []Release {
+	return []Release{
+		{ // this is special Release: Backlog
+			Number:    0,
+			StartDate: math.MinInt64,
+			EndDate:   math.MaxInt64,
+			Done:      false,
+			Title:     "Backlog",
+		},
+		{ // this is special Release: Canceled
+			Number:    math.MaxUint32,
+			StartDate: math.MinInt64,
+			EndDate:   math.MaxInt64,
+			Done:      false,
+			Title:     "Canceled",
+		},
+	}
+}
+
+func (r *Release) Backlog() bool {
+	return r.Number == 0
+}
+
+func (r *Release) Canceled() bool {
+	return r.Number == math.MaxUint32
+}
+
+func (r *Release) Predefined() bool {
+	return r.Backlog() || r.Canceled()
 }

@@ -23,8 +23,42 @@
 package entity
 
 type Type struct {
-	ParentNumber uint   `json:"parentid"`
-	Number       uint   `json:"id"`
+	ParentNumber uint32 `json:"parentid"`
+	Number       uint32 `json:"id"`
 	Name         string `json:"name"`
-	Weight       uint   `json:"weight"`
+}
+
+func defaultTypeArray() []Type {
+	return []Type{
+		{ // very special type: Product. Expect no use
+			ParentNumber: 0,
+			Number:       1,
+			Name:         "Product",
+		},
+		{
+			ParentNumber: 1,
+			Number:       100,
+			Name:         "Epic",
+		},
+		{
+			ParentNumber: 100,
+			Number:       300,
+			Name:         "Story",
+		},
+		{
+			ParentNumber: 300,
+			Number:       600,
+			Name:         "Task",
+		},
+		{
+			ParentNumber: 1,
+			Number:       1000,
+			Name:         "Bug",
+		},
+		{
+			ParentNumber: 100,
+			Number:       2000,
+			Name:         "Research",
+		},
+	}
 }

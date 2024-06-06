@@ -23,7 +23,7 @@
 package entity
 
 type Persone struct {
-	Number uint   `json:"id"`
+	Number uint32 `json:"id"`
 	Name   string `json:"name"`
 	Alias  string `json:"alias"`
 	Email  string `json:"email"`

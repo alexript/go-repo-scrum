@@ -23,9 +23,9 @@
 package entity
 
 type Priority struct {
-	Number uint   `json:"id"`
+	Number uint32 `json:"id"`
 	Name   string `json:"name"`
-	Weight uint   `json:"weight"`
+	Weight uint32 `json:"weight"`
 }
 
 func defaultPriorityArray() []Priority {

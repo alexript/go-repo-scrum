@@ -43,6 +43,7 @@ func Start() {
 	if err != nil {
 		panic(err)
 	}
+	defer root.SaveCatalog(catalog)
 
 	if catalog == nil {
 		panic(errors.New("Something strange is happens now..."))

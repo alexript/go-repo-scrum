@@ -23,7 +23,47 @@
 package entity
 
 type State struct {
-	Number uint   `json:"id"`
-	Weight uint   `json:"weight"`
+	Number uint32 `json:"id"`
+	Weight uint32 `json:"weight"`
 	Name   string `json:"name"`
+}
+
+func defaultStateArray() []State {
+	return []State{
+		{
+			Number: 0,
+			Weight: 0,
+			Name:   "Draft",
+		},
+		{
+			Number: 1,
+			Weight: 100,
+			Name:   "New",
+		},
+		{
+			Number: 2,
+			Weight: 200,
+			Name:   "Open",
+		},
+		{
+			Number: 3,
+			Weight: 300,
+			Name:   "InProgress",
+		},
+		{
+			Number: 4,
+			Weight: 400,
+			Name:   "Done",
+		},
+		{
+			Number: 5,
+			Weight: 500,
+			Name:   "Cancel",
+		},
+		{
+			Number: 6,
+			Weight: 10000,
+			Name:   "Complete",
+		},
+	}
 }

@@ -23,14 +23,14 @@
 package entity
 
 type Issue struct {
-	SprintNumber   uint
-	TypeNumber     uint
-	ParentNumber   uint
-	Number         uint
-	Date           uint
+	SprintNumber   uint32
+	TypeNumber     uint32
+	ParentNumber   uint32
+	Number         uint32
+	Date           int64
 	Title          string
-	ReporterNumber uint
+	ReporterNumber uint32
 	Description    string
-	PriorityNumber uint
-	StateNumber    uint
+	PriorityNumber uint32
+	StateNumber    uint32
 }

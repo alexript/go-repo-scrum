@@ -33,7 +33,11 @@ type Catalog struct {
 
 func CreateDefaultCatalog() *Catalog {
 	return &Catalog{
-		Persone:  defaultPersoneArray(),
+		Type:     defaultTypeArray(),
+		State:    defaultStateArray(),
 		Priority: defaultPriorityArray(),
+		Persone:  defaultPersoneArray(),
+		Release:  defaultReleaseArray(),
+		Sprint:   defaultSprintArray(),
 	}
 }

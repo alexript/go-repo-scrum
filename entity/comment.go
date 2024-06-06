@@ -23,9 +23,9 @@
 package entity
 
 type Comment struct {
-	IssueNumber  uint
-	ParentNumber uint
-	Date         uint
-	AuthorNumber uint
+	IssueNumber  uint32
+	ParentNumber uint32
+	Date         int64
+	AuthorNumber uint32
 	Text         string
 }
