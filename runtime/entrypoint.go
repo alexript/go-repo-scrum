@@ -35,6 +35,16 @@ var (
 
 func Start() {
 	root := fs.Get()
+	onStart(root)
+}
+
+func StartIn(dirname string) {
+	root := fs.GetIn(dirname)
+	onStart(root)
+}
+
+func onStart(root *fs.Root) {
+
 	if err := root.Prepare(); err != nil {
 		panic(err)
 	}
@@ -48,5 +58,4 @@ func Start() {
 	if catalog == nil {
 		panic(errors.New("Something strange is happens now..."))
 	}
-
 }

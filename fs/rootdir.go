@@ -46,6 +46,19 @@ type Root struct {
 	Dirname string
 }
 
+func GetIn(dirname string) *Root {
+
+	abspath, err := filepath.Abs(dirname)
+	if err != nil {
+		panic(err)
+	}
+
+	root := path.Join(abspath, rootdirName)
+
+	return &Root{
+		Dirname: root,
+	}
+}
 func Get() *Root {
 	var dirname string
 	if len(os.Args) > 1 {
@@ -67,17 +80,7 @@ func Get() *Root {
 			dirname = d
 		}
 	}
-
-	abspath, err := filepath.Abs(dirname)
-	if err != nil {
-		panic(err)
-	}
-
-	root := path.Join(abspath, rootdirName)
-
-	return &Root{
-		Dirname: root,
-	}
+	return GetIn(dirname)
 }
 
 // TODO: ensure correct behavior under windows
