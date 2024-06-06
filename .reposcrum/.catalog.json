@@ -1,0 +1,1 @@
+{"type":null,"state":null,"priority":[{"id":0,"name":"Trivial","weight":0},{"id":1,"name":"Minor","weight":1000},{"id":2,"name":"Normal","weight":2000},{"id":3,"name":"Major","weight":3000},{"id":4,"name":"Critical","weight":10000},{"id":5,"name":"Blocker","weight":1000000}],"parsone":[],"release":null,"sprint":null}

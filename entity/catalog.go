@@ -22,13 +22,18 @@
 
 package entity
 
-type Persone struct {
-	Number uint   `json:"id"`
-	Name   string `json:"name"`
-	Alias  string `json:"alias"`
-	Email  string `json:"email"`
+type Catalog struct {
+	Type     []Type     `json:"type"`
+	State    []State    `json:"state"`
+	Priority []Priority `json:"priority"`
+	Persone  []Persone  `json:"parsone"`
+	Release  []Release  `json:"release"`
+	Sprint   []Sprint   `json:"sprint"`
 }
 
-func defaultPersoneArray() []Persone {
-	return []Persone{}
+func CreateDefaultCatalog() *Catalog {
+	return &Catalog{
+		Persone:  defaultPersoneArray(),
+		Priority: defaultPriorityArray(),
+	}
 }

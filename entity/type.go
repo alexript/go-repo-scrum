@@ -23,8 +23,8 @@
 package entity
 
 type Type struct {
-	ParentNumber uint
-	Number       uint
-	Name         string
-	Weight       uint
+	ParentNumber uint   `json:"parentid"`
+	Number       uint   `json:"id"`
+	Name         string `json:"name"`
+	Weight       uint   `json:"weight"`
 }

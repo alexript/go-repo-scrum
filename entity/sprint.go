@@ -23,9 +23,9 @@
 package entity
 
 type Sprint struct {
-	ReleaseNumber uint
-	Number        uint
-	StartDate     uint
-	EndDate       uint
-	Done          bool
+	ReleaseNumber uint `json:"releaseid"`
+	Number        uint `json:"id"`
+	StartDate     uint `json:"start"`
+	EndDate       uint `json:"end"`
+	Done          bool `json:"done"`
 }

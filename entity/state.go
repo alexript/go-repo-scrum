@@ -23,7 +23,7 @@
 package entity
 
 type State struct {
-	Number uint
-	Weight uint
-	Name   string
+	Number uint   `json:"id"`
+	Weight uint   `json:"weight"`
+	Name   string `json:"name"`
 }

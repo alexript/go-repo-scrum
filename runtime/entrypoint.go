@@ -22,12 +22,30 @@
 
 package runtime
 
-import "github.com/alexript/go-repo-scrum/fs"
+import (
+	"errors"
+
+	"github.com/alexript/go-repo-scrum/entity"
+	"github.com/alexript/go-repo-scrum/fs"
+)
+
+var (
+	catalog *entity.Catalog
+)
 
 func Start() {
 	root := fs.Get()
 	if err := root.Prepare(); err != nil {
 		panic(err)
+	}
+
+	catalog, err := root.OpenCatalog()
+	if err != nil {
+		panic(err)
+	}
+
+	if catalog == nil {
+		panic(errors.New("Something strange is happens now..."))
 	}
 
 }

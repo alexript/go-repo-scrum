@@ -23,7 +23,44 @@
 package entity
 
 type Priority struct {
-	Number uint
-	Name   string
-	Weight uint
+	Number uint   `json:"id"`
+	Name   string `json:"name"`
+	Weight uint   `json:"weight"`
+}
+
+func defaultPriorityArray() []Priority {
+	return []Priority{
+		{
+			Number: 0,
+			Name:   "Trivial",
+			Weight: 0,
+		},
+
+		{
+			Number: 1,
+			Name:   "Minor",
+			Weight: 1000,
+		},
+
+		{
+			Number: 2,
+			Name:   "Normal",
+			Weight: 2000,
+		},
+		{
+			Number: 3,
+			Name:   "Major",
+			Weight: 3000,
+		},
+		{
+			Number: 4,
+			Name:   "Critical",
+			Weight: 10000,
+		},
+		{
+			Number: 5,
+			Name:   "Blocker",
+			Weight: 1000000,
+		},
+	}
 }

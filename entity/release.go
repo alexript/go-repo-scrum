@@ -23,8 +23,8 @@
 package entity
 
 type Release struct {
-	Number    uint
-	StartDate uint
-	EndDate   uint
-	Done      bool
+	Number    uint `json:"id"`
+	StartDate uint `json:"start"`
+	EndDate   uint `json:"end"`
+	Done      bool `json:"done"`
 }
