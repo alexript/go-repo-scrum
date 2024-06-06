@@ -36,11 +36,22 @@ const (
 	catalogFilename = ".catalog.json"
 )
 
+type CatalogFile struct {
+	Version uint8          `json:"schemaversion"`
+	Catalog entity.Catalog `json:"catalog"`
+}
+
 func (root *Root) SaveCatalog(catalog *entity.Catalog) error {
 	if catalog == nil {
 		return nil // TODO: assert?
 	}
-	bytes, err := json.Marshal(catalog)
+
+	catalogFile := CatalogFile{
+		Version: catalogversion,
+		Catalog: *catalog,
+	}
+
+	bytes, err := json.Marshal(catalogFile)
 	if err != nil {
 		return err
 	}
@@ -90,11 +101,11 @@ func (root *Root) OpenCatalog() (*entity.Catalog, error) {
 		return nil, err
 	}
 
-	catalog = &entity.Catalog{}
+	catalogfile := &CatalogFile{}
 
-	err = json.Unmarshal(bytes, catalog)
+	err = json.Unmarshal(bytes, catalogfile)
 	if err != nil {
 		return nil, err
 	}
-	return catalog, nil
+	return &catalogfile.Catalog, nil
 }
