@@ -23,9 +23,13 @@
 package entity
 
 type Type struct {
-	ParentNumber uint32 `json:"parentid"`
-	Number       uint32 `json:"id"`
+	ParentNumber Id     `json:"parentid"`
+	Number       Id     `json:"id"`
 	Name         string `json:"name"`
+}
+
+func (t *Type) GetID() Id {
+	return t.Number
 }
 
 func defaultTypeArray() []Type {

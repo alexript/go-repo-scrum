@@ -23,11 +23,15 @@
 package entity
 
 type Sprint struct {
-	ReleaseNumber uint32 `json:"releaseid"`
-	Number        uint32 `json:"id"`
-	StartDate     int64  `json:"start"`
-	EndDate       int64  `json:"end"`
-	Done          bool   `json:"done"`
+	ReleaseNumber Id        `json:"releaseid"`
+	Number        Id        `json:"id"`
+	StartDate     Timestamp `json:"start"`
+	EndDate       Timestamp `json:"end"`
+	Done          bool      `json:"done"`
+}
+
+func (s *Sprint) GetID() Id {
+	return s.Number
 }
 
 func defaultSprintArray() []Sprint {

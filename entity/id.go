@@ -22,17 +22,60 @@
 
 package entity
 
-type Persone struct {
-	Number Id     `json:"id"`
-	Name   string `json:"name"`
-	Alias  string `json:"alias"`
-	Email  string `json:"email"`
+type Id uint32
+
+type Identable interface {
+	GetID() Id
 }
 
-func defaultPersoneArray() []Persone {
-	return []Persone{}
+type Identables []Identable
+
+func (a Identables) First() Identable {
+	var first Identable
+	for _, v := range a {
+		if v == nil {
+			continue
+		}
+		if first == nil {
+			first = v
+
+		} else if v.GetID() < first.GetID() {
+			first = v
+		}
+	}
+	return first
 }
 
-func (p *Persone) GetID() Id {
-	return p.Number
+func (a Identables) Last() Identable {
+	var last Identable
+	for _, v := range a {
+		if v == nil {
+			continue
+		}
+		if last == nil {
+			last = v
+		} else if v.GetID() > last.GetID() {
+			last = v
+		}
+	}
+	return last
+}
+
+func (a Identables) CreateID() Id {
+	last := a.Last()
+	id := last.GetID()
+	return id + 1
+}
+
+func (a Identables) Contain(id Id) bool {
+
+	for _, v := range a {
+		if v == nil {
+			continue
+		}
+		if id == v.GetID() {
+			return true
+		}
+	}
+	return false
 }

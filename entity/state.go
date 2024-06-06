@@ -23,9 +23,13 @@
 package entity
 
 type State struct {
-	Number uint32 `json:"id"`
-	Weight uint32 `json:"weight"`
+	Number Id     `json:"id"`
+	Weight Weight `json:"weight"`
 	Name   string `json:"name"`
+}
+
+func (s *State) GetID() Id {
+	return s.Number
 }
 
 func defaultStateArray() []State {

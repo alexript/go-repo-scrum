@@ -25,11 +25,15 @@ package entity
 import "math"
 
 type Release struct {
-	Number    uint32 `json:"id"`
-	StartDate int64  `json:"start"`
-	EndDate   int64  `json:"end"`
-	Done      bool   `json:"done"`
-	Title     string `json:"title"`
+	Number    Id        `json:"id"`
+	StartDate Timestamp `json:"start"`
+	EndDate   Timestamp `json:"end"`
+	Done      bool      `json:"done"`
+	Title     string    `json:"title"`
+}
+
+func (r *Release) GetID() Id {
+	return r.Number
 }
 
 func defaultReleaseArray() []Release {

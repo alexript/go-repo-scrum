@@ -23,9 +23,14 @@
 package entity
 
 type Comment struct {
-	IssueNumber  uint32 `json:"issueid"`
-	ParentNumber uint32 `json:"parentid"` // means 'parent comment'
-	Date         int64  `json:"date"`
-	AuthorNumber uint32 `json:"personid"`
-	Text         string `json:"text"`
+	Id           Id        `json:"id"`
+	IssueNumber  Id        `json:"issueid"`
+	ParentNumber Id        `json:"parentid"` // means 'parent comment'
+	Date         Timestamp `json:"date"`
+	AuthorNumber Id        `json:"personid"`
+	Text         string    `json:"text"`
+}
+
+func (c *Comment) GetID() Id {
+	return c.Id
 }

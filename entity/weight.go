@@ -22,17 +22,4 @@
 
 package entity
 
-type Persone struct {
-	Number Id     `json:"id"`
-	Name   string `json:"name"`
-	Alias  string `json:"alias"`
-	Email  string `json:"email"`
-}
-
-func defaultPersoneArray() []Persone {
-	return []Persone{}
-}
-
-func (p *Persone) GetID() Id {
-	return p.Number
-}
+type Weight uint32

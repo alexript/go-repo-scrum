@@ -23,9 +23,13 @@
 package entity
 
 type Issue struct {
-	Status      Status `json:"status"`
-	Number      uint32 `json:"id"`
-	Date        int64  `json:"date"` // NOTE: no date until 'New' state
-	Title       string `json:"title"`
-	Description string `json:"text"`
+	Status      Status    `json:"status"`
+	Number      Id        `json:"id"`
+	Date        Timestamp `json:"date"` // NOTE: no date until 'New' state
+	Title       string    `json:"title"`
+	Description string    `json:"text"`
+}
+
+func (i *Issue) GetID() Id {
+	return i.Number
 }

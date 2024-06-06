@@ -23,19 +23,24 @@
 package entity
 
 type Status struct {
-	ReporterNumber uint32 `json:"reporterid"`
-	ReleaseNumber  uint32 `json:"releaseid"`
-	SprintNumber   uint32 `json:"sprintid"`
-	TypeNuber      uint32 `json:"typid"`
-	ParentNumber   uint32 `json:"parentid"`
-	PriorityNumber uint32 `json:"priorityid"`
-	StateNumber    uint32 `json:"stateid"`
+	ReporterNumber Id `json:"reporterid"`
+	ReleaseNumber  Id `json:"releaseid"`
+	SprintNumber   Id `json:"sprintid"`
+	TypeNuber      Id `json:"typid"`
+	ParentNumber   Id `json:"parentid"`
+	PriorityNumber Id `json:"priorityid"`
+	StateNumber    Id `json:"stateid"`
 }
 
 type Change struct {
-	IssueNumber uint32 `json:"issueid"`
-	Date        int64  `json:"date"`
-	Persone     uint32 `json:"personeid"`
-	Before      Status `json:"before"`
-	After       Status `json:"after"`
+	Id          Id        `json:"id"`
+	IssueNumber Id        `json:"issueid"`
+	Date        Timestamp `json:"date"`
+	Persone     Id        `json:"personeid"`
+	Before      Status    `json:"before"`
+	After       Status    `json:"after"`
+}
+
+func (c *Change) GetID() Id {
+	return c.Id
 }

@@ -22,17 +22,14 @@
 
 package entity
 
-type Persone struct {
-	Number Id     `json:"id"`
-	Name   string `json:"name"`
-	Alias  string `json:"alias"`
-	Email  string `json:"email"`
+import "time"
+
+type Timestamp int64
+
+func (t Timestamp) ToDatetime() time.Time {
+	return time.UnixMilli(int64(t))
 }
 
-func defaultPersoneArray() []Persone {
-	return []Persone{}
-}
-
-func (p *Persone) GetID() Id {
-	return p.Number
+func ToTimestamp(t *time.Time) Timestamp {
+	return Timestamp(t.UnixMilli())
 }
