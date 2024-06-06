@@ -20,8 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package main
+package entity
 
-func main() {
-
+type Issue struct {
+	SprintNumber   uint
+	TypeNumber     uint
+	ParentNumber   uint
+	Number         uint
+	Date           uint
+	Title          string
+	ReporterNumber uint
+	Description    string
+	PriorityNumber uint
+	StateNumber    uint
 }

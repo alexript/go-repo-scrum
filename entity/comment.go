@@ -20,8 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package main
+package entity
 
-func main() {
-
+type Comment struct {
+	IssueNumber  uint
+	ParentNumber uint
+	Date         uint
+	AuthorNumber uint
+	Text         string
 }

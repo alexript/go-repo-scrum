@@ -20,8 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package main
+package entity
 
-func main() {
-
+type Release struct {
+	Number    uint
+	StartDate uint
+	EndDate   uint
+	Done      bool
 }
