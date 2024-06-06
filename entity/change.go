@@ -22,10 +22,20 @@
 
 package entity
 
-type Issue struct {
-	Status      Status `json:"status"`
-	Number      uint32 `json:"id"`
-	Date        int64  `json:"date"` // NOTE: no date until 'New' state
-	Title       string `json:"title"`
-	Description string `json:"text"`
+type Status struct {
+	ReporterNumber uint32 `json:"reporterid"`
+	ReleaseNumber  uint32 `json:"releaseid"`
+	SprintNumber   uint32 `json:"sprintid"`
+	TypeNuber      uint32 `json:"typid"`
+	ParentNumber   uint32 `json:"parentid"`
+	PriorityNumber uint32 `json:"priorityid"`
+	StateNumber    uint32 `json:"stateid"`
+}
+
+type Change struct {
+	IssueNumber uint32 `json:"issueid"`
+	Date        int64  `json:"date"`
+	Persone     uint32 `json:"personeid"`
+	Before      Status `json:"before"`
+	After       Status `json:"after"`
 }
