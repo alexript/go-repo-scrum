@@ -79,3 +79,16 @@ func (a Identables) Contain(id Id) bool {
 	}
 	return false
 }
+
+func (a Identables) Get(id Id) Identable {
+
+	for _, v := range a {
+		if v == nil {
+			continue
+		}
+		if id == v.GetID() {
+			return v
+		}
+	}
+	return nil
+}

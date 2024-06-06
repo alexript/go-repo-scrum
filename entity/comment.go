@@ -34,3 +34,7 @@ type Comment struct {
 func (c *Comment) GetID() Id {
 	return c.Id
 }
+
+func (c *Comment) Parent() Id {
+	return c.ParentNumber
+}

@@ -122,3 +122,17 @@ func TestContain(t *testing.T) {
 		t.Fatalf("Found unexisted object")
 	}
 }
+
+func TestGet(t *testing.T) {
+	objcts := createTestIdentables()
+	found := objcts.Get(1)
+	notFund := objcts.Get(42)
+
+	if found == nil {
+		t.Fatalf("Not found existed object")
+	}
+
+	if notFund != nil {
+		t.Fatalf("Found not existed object: %v+", notFund)
+	}
+}

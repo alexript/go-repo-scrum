@@ -32,6 +32,10 @@ func (t *Type) GetID() Id {
 	return t.Number
 }
 
+func (t *Type) Parent() Id {
+	return t.ParentNumber
+}
+
 func defaultTypeArray() []Type {
 	return []Type{
 		{ // very special type: Product. Expect no use

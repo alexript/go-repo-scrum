@@ -22,22 +22,23 @@
 
 package entity
 
-type Sprint struct {
-	ReleaseNumber Id        `json:"releaseid"`
-	Number        Id        `json:"id"`
-	StartDate     Timestamp `json:"start"`
-	EndDate       Timestamp `json:"end"`
-	Done          bool      `json:"done"`
+type Child interface {
+	Identable
+	Parent() Id
 }
 
-func (s *Sprint) GetID() Id {
-	return s.Number
-}
+type Children []Child
 
-func defaultSprintArray() []Sprint {
-	return []Sprint{}
-}
+func (c Children) Brothers(parentId Id) []Id {
+	result := make([]Id, 0)
+	for _, v := range c {
+		if v == nil {
+			continue
+		}
+		if v.Parent() == parentId {
+			result = append(result, v.GetID())
+		}
 
-func (s *Sprint) Parent() Id {
-	return s.ReleaseNumber
+	}
+	return result
 }

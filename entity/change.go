@@ -44,3 +44,7 @@ type Change struct {
 func (c *Change) GetID() Id {
 	return c.Id
 }
+
+func (c *Change) Parent() Id {
+	return c.IssueNumber
+}
