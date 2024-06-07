@@ -20,42 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package entity
+package user
 
-type Type struct {
-	Number Id     `json:"id"`
-	Name   string `json:"name"`
+import "github.com/alexript/go-repo-scrum/fs"
+
+type User struct {
+	Name  string
+	Login string
+	Email string
 }
 
-func (t *Type) GetID() Id {
-	return t.Number
-}
+func CurrentUser(root *fs.Root) *User {
+	user := &User{}
 
-func defaultTypeArray() []Type {
-	return []Type{
-		{ // very special type: Product. Expect no use
-			Number: 1,
-			Name:   "Product",
-		},
-		{
-			Number: 100,
-			Name:   "Epic",
-		},
-		{
-			Number: 300,
-			Name:   "Story",
-		},
-		{
-			Number: 600,
-			Name:   "Task",
-		},
-		{
-			Number: 1000,
-			Name:   "Bug",
-		},
-		{
-			Number: 2000,
-			Name:   "Research",
-		},
+	if err := gitCurrentUser(root, user); err != nil {
+		osCurrentUser(root, user)
 	}
+
+	return user
 }

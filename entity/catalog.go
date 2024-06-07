@@ -23,16 +23,18 @@
 package entity
 
 type Catalog struct {
+	changed  bool
 	Type     []Type     `json:"type"`
 	State    []State    `json:"state"`
 	Priority []Priority `json:"priority"`
-	Persone  []Persone  `json:"parsone"`
+	Persone  []Persone  `json:"persone"`
 	Release  []Release  `json:"release"`
 	Sprint   []Sprint   `json:"sprint"`
 }
 
 func CreateDefaultCatalog() *Catalog {
 	return &Catalog{
+		changed:  true,
 		Type:     defaultTypeArray(),
 		State:    defaultStateArray(),
 		Priority: defaultPriorityArray(),
@@ -40,4 +42,12 @@ func CreateDefaultCatalog() *Catalog {
 		Release:  defaultReleaseArray(),
 		Sprint:   defaultSprintArray(),
 	}
+}
+
+func (c *Catalog) Changed() bool {
+	return c.changed
+}
+
+func (c *Catalog) MarkSaved() {
+	c.changed = false
 }

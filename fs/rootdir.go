@@ -46,6 +46,7 @@ This is directory with Scrum data of the repo
 type Root struct {
 	Dirname string
 	Ini     *ini.Ini
+	Repodir string
 }
 
 func GetIn(dirname string) *Root {
@@ -59,6 +60,7 @@ func GetIn(dirname string) *Root {
 
 	return &Root{
 		Dirname: root,
+		Repodir: abspath,
 	}
 }
 func Get() *Root {

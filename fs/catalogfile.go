@@ -46,6 +46,10 @@ func (root *Root) SaveCatalog(catalog *entity.Catalog) error {
 		return nil // TODO: assert?
 	}
 
+	if !catalog.Changed() {
+		return nil
+	}
+
 	catalogFile := CatalogFile{
 		Version: catalogversion,
 		Catalog: *catalog,
@@ -68,6 +72,7 @@ func (root *Root) SaveCatalog(catalog *entity.Catalog) error {
 	if err != nil {
 		return err
 	}
+	catalog.MarkSaved()
 	return nil
 }
 

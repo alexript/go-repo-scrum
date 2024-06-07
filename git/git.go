@@ -20,25 +20,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package entity
+package git
 
-type Child interface {
-	Identable
-	Parent() Id
+import (
+	"os"
+	"os/exec"
+	"strings"
+)
+
+type Git struct {
+	Dir    string
+	gitCmd string
 }
 
-type Children []Child
-
-func (c Children) Brothers(parentId Id) []Id {
-	result := make([]Id, 0)
-	for _, v := range c {
-		if v == nil {
-			continue
-		}
-		if v.Parent() == parentId {
-			result = append(result, v.GetID())
-		}
-
+func New(gitpath string, repopath string) *Git {
+	return &Git{
+		Dir:    repopath,
+		gitCmd: gitpath,
 	}
-	return result
+}
+
+func Find(repopath string) (*Git, error) {
+	gitPath, err := exec.LookPath("git")
+	if err != nil {
+		return nil, err
+	}
+	return New(gitPath, repopath), nil
+}
+
+func (g *Git) exec(args []string) (string, error) {
+	cmd := exec.Command(g.gitCmd, args...)
+	cmd.Dir = g.Dir
+	cmd.Env = os.Environ()
+	out, err := cmd.Output()
+	if err != nil {
+		return "", err
+	} else if out == nil {
+		return "", exec.ErrNotFound
+	}
+	str := string(out)
+	return strings.TrimSpace(str), nil
+
+}
+
+func (g *Git) GetUsername() (string, error) {
+	return g.exec([]string{"config", "--get", "user.name"})
+}
+
+func (g *Git) GetUseremail() (string, error) {
+	return g.exec([]string{"config", "--get", "user.email"})
 }

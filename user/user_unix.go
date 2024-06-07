@@ -20,42 +20,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package entity
+//go:build linux || darwin
 
-type Type struct {
-	Number Id     `json:"id"`
-	Name   string `json:"name"`
-}
+package user
 
-func (t *Type) GetID() Id {
-	return t.Number
-}
+import (
+	"fmt"
+	"os"
+	usr "os/user"
 
-func defaultTypeArray() []Type {
-	return []Type{
-		{ // very special type: Product. Expect no use
-			Number: 1,
-			Name:   "Product",
-		},
-		{
-			Number: 100,
-			Name:   "Epic",
-		},
-		{
-			Number: 300,
-			Name:   "Story",
-		},
-		{
-			Number: 600,
-			Name:   "Task",
-		},
-		{
-			Number: 1000,
-			Name:   "Bug",
-		},
-		{
-			Number: 2000,
-			Name:   "Research",
-		},
+	"github.com/alexript/go-repo-scrum/fs"
+)
+
+func osCurrentUser(root *fs.Root, user *User) {
+	u, err := usr.Current()
+	if err != nil {
+		return
 	}
+	user.Name = u.Username
+	user.Login = u.Username
+	if root.Ini.Bool("user.email.enable", false) {
+		hostname, err := os.Hostname()
+		if err != nil {
+			user.Email = fmt.Sprintf("%s@%s", u.Username, hostname)
+		}
+	} else {
+		user.Email = ""
+	}
+
 }

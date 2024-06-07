@@ -20,42 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package entity
+//go:build windows
 
-type Type struct {
-	Number Id     `json:"id"`
-	Name   string `json:"name"`
-}
+package user
 
-func (t *Type) GetID() Id {
-	return t.Number
-}
+import "github.com/alexript/go-repo-scrum/fs"
 
-func defaultTypeArray() []Type {
-	return []Type{
-		{ // very special type: Product. Expect no use
-			Number: 1,
-			Name:   "Product",
-		},
-		{
-			Number: 100,
-			Name:   "Epic",
-		},
-		{
-			Number: 300,
-			Name:   "Story",
-		},
-		{
-			Number: 600,
-			Name:   "Task",
-		},
-		{
-			Number: 1000,
-			Name:   "Bug",
-		},
-		{
-			Number: 2000,
-			Name:   "Research",
-		},
-	}
+func osCurrentUser(root *fs.Root, user *User) {
+	panic("Not implemented yet")
 }

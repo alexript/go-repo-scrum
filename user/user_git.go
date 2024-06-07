@@ -20,42 +20,60 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package entity
+package user
 
-type Type struct {
-	Number Id     `json:"id"`
-	Name   string `json:"name"`
-}
+import (
+	"errors"
+	"net/mail"
+	"os"
+	"path"
 
-func (t *Type) GetID() Id {
-	return t.Number
-}
+	"github.com/alexript/go-repo-scrum/fs"
+	"github.com/alexript/go-repo-scrum/git"
+)
 
-func defaultTypeArray() []Type {
-	return []Type{
-		{ // very special type: Product. Expect no use
-			Number: 1,
-			Name:   "Product",
-		},
-		{
-			Number: 100,
-			Name:   "Epic",
-		},
-		{
-			Number: 300,
-			Name:   "Story",
-		},
-		{
-			Number: 600,
-			Name:   "Task",
-		},
-		{
-			Number: 1000,
-			Name:   "Bug",
-		},
-		{
-			Number: 2000,
-			Name:   "Research",
-		},
+var (
+	errNoGit    = errors.New("Git client not found")
+	errNoDotgit = errors.New("This is not a git repo")
+	errGitError = errors.New("Git error")
+)
+
+func gitCurrentUser(root *fs.Root, user *User) error {
+	dotgitdir := path.Join(root.Repodir, ".git")
+	stat, err := os.Stat(dotgitdir)
+	if err != nil {
+		return errors.Join(errNoDotgit, err)
 	}
+	if !stat.IsDir() {
+		return errNoDotgit
+	}
+
+	gitcli, err := git.Find(root.Repodir)
+	if err != nil {
+		return errors.Join(errNoGit, err)
+	}
+
+	username, err := gitcli.GetUsername()
+	if err != nil {
+		return errors.Join(errGitError, err)
+	}
+	user.Name = username
+
+	email, err := gitcli.GetUseremail()
+	if err != nil {
+		return errors.Join(errGitError, err)
+	}
+
+	address, err := mail.ParseAddress(email)
+	if err == nil {
+		user.Login = address.Name
+	}
+
+	if root.Ini.Bool("user.email.enable", false) {
+		user.Email = email
+	} else {
+		user.Email = ""
+	}
+
+	return errGitError
 }

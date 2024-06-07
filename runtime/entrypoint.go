@@ -25,14 +25,17 @@ package runtime
 import (
 	"errors"
 	"fmt"
+	rt "runtime"
 
 	"github.com/alexript/go-repo-scrum/entity"
 	"github.com/alexript/go-repo-scrum/fs"
+	"github.com/alexript/go-repo-scrum/user"
 )
 
 var (
 	catalog *entity.Catalog
 	root    *fs.Root
+	uid     entity.Id
 )
 
 func startUI(root *fs.Root) {
@@ -74,4 +77,15 @@ func onStart(root *fs.Root) {
 	if catalog == nil {
 		panic(errors.New("Something strange is happens now..."))
 	}
+	usr := user.CurrentUser(root)
+	uid = catalog.EnsurePersone(usr.Name, usr.Login, usr.Email)
+	rt.GC()
+}
+
+func Catalog() *entity.Catalog {
+	return catalog
+}
+
+func UID() entity.Id {
+	return uid
 }
