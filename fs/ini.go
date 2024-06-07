@@ -20,11 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package main
+package fs
 
-import "github.com/alexript/go-repo-scrum/runtime"
+import (
+	"path"
 
-func main() {
-	runtime.Start(true)
-	defer runtime.Stop()
+	"github.com/gookit/ini/v2"
+)
+
+const (
+	iniFilename    = "go-repo-scrum.ini"
+	defaultInifile = `
+[user]
+email.hide = false
+	`
+)
+
+func readConfig(root *Root) *ini.Ini {
+	i := ini.NewWithOptions(func(o *ini.Options) {
+		o.Readonly = false
+		o.ParseEnv = true
+		o.ParseVar = true
+		o.IgnoreCase = false
+	})
+	i.LoadStrings(defaultInifile)
+	i.LoadExists(path.Join(root.Dirname, iniFilename))
+	root.Ini = i
+	return i
+}
+
+func writeConfig(root *Root) {
+	root.Ini.WriteToFile(path.Join(root.Dirname, iniFilename))
 }

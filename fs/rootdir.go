@@ -29,6 +29,7 @@ import (
 	"path/filepath"
 	"text/template"
 
+	"github.com/gookit/ini/v2"
 	"golang.org/x/sys/unix"
 )
 
@@ -44,6 +45,7 @@ This is directory with Scrum data of the repo
 
 type Root struct {
 	Dirname string
+	Ini     *ini.Ini
 }
 
 func GetIn(dirname string) *Root {
@@ -107,10 +109,16 @@ func (root *Root) Prepare() error {
 			return os.ErrPermission
 		}
 
+		readConfig(root)
+
 		return root.checkReadmeMd()
 	}
 
 	return os.ErrInvalid
+}
+
+func Close(root *Root) {
+	writeConfig(root)
 }
 
 func (root *Root) checkReadmeMd() error {

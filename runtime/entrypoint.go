@@ -32,6 +32,7 @@ import (
 
 var (
 	catalog *entity.Catalog
+	root    *fs.Root
 )
 
 func startUI(root *fs.Root) {
@@ -39,7 +40,7 @@ func startUI(root *fs.Root) {
 }
 
 func Start(withUI bool) {
-	root := fs.Get()
+	root = fs.Get()
 	onStart(root)
 	if withUI {
 		startUI(root)
@@ -47,11 +48,15 @@ func Start(withUI bool) {
 }
 
 func StartIn(dirname string, withUI bool) {
-	root := fs.GetIn(dirname)
+	root = fs.GetIn(dirname)
 	onStart(root)
 	if withUI {
 		startUI(root)
 	}
+}
+
+func Stop() {
+	fs.Close(root)
 }
 
 func onStart(root *fs.Root) {
