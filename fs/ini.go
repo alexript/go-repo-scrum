@@ -32,7 +32,7 @@ const (
 	iniFilename    = "go-repo-scrum.ini"
 	defaultInifile = `
 [user]
-email.hide = false
+email.enable = false
 	`
 )
 

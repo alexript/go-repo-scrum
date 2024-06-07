@@ -1,2 +1,3 @@
 go-repo-scrum*
 !cmd/go-repo-scrum
+!.reposcrum/go-repo-scrum.ini
